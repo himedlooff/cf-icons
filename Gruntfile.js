@@ -225,7 +225,8 @@ module.exports = function(grunt) {
   /**
    * Create custom task aliases and combinations
    */
-  grunt.registerTask('vendor', ['clean', 'bower', 'copy:component_assets', 'copy:docs_assets', 'concat']);
-  grunt.registerTask('default', ['clean', 'concat', 'less', 'string-replace', 'autoprefixer', 'copy:docs', 'topdoc', 'legacssy']);
+  var cfTaskValidator = require('cf-grunt-config/tasks/validator');
+  grunt.registerTask('vendor', cfTaskValidator(grunt, 'vendor', ['clean', 'bower', 'copy:component_assets', 'copy:docs_assets', 'concat:main', 'concat:lt-ie8']));
+  grunt.registerTask('default', cfTaskValidator(grunt, 'default', ['clean', 'concat', 'less', 'string-replace', 'autoprefixer', 'copy:docs', 'topdoc', 'legacssy']));
 
 };
